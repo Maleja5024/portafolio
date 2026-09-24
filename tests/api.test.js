@@ -48,3 +48,7 @@ test('la clave se codifica en la URL', async () => {
   await createApi(CFG, f).verifyKey('a b&c');
   eq(f.calls[0].url, 'https://r/admin?workflowApiKey=a%20b%26c');
 });
+test('createProject entiende la respuesta real de Retool: {ok, data: [{id}]}', async () => {
+  const id = await createApi(CFG, fakeFetch(200, { ok: true, data: [{ id: 9 }] })).createProject('kA', { proyecto: 'A', contexto: 'B', rol: 'C', imagenes: 'u' });
+  eq(id, 9);
+});

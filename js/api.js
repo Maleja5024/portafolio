@@ -42,7 +42,8 @@
         const data = await call(config.ADMIN_URL, key, {
           accion: 'crear', proyecto: p.proyecto, contexto: p.contexto, rol: p.rol, imagenes: p.imagenes
         });
-        return data.id;
+        const fila = Array.isArray(data) ? data[0] : data;
+        return fila && fila.id;
       },
       async deleteProject(key, id) {
         await call(config.ADMIN_URL, key, { accion: 'eliminar', id: id });

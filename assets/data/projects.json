@@ -1,6 +1,26 @@
 [
-  { "id": "p1", "categoria": "App Móvil", "slug": "app-movil" },
-  { "id": "p2", "categoria": "Dashboard", "slug": "dashboard" },
-  { "id": "p3", "categoria": "Sitio Web", "slug": "sitio-web" },
-  { "id": "p4", "categoria": "Sistema de Diseño", "slug": "sistema-diseno" }
+  {
+    "proyecto": "EanMob — Plataforma de Movilidad Compartida Sostenible",
+    "contexto": "EanMob es una plataforma móvil diseñada para conectar estudiantes de la Universidad EAN que comparten rutas de desplazamiento. El objetivo es reducir el tráfico, disminuir emisiones de carbono y crear comunidad universitaria a través de la movilidad sostenible.",
+    "rol": "Flujo de búsqueda y publicación de viajes\nPantalla de inicio de sesión y creación de cuenta\nDiseño del formulario con validación de errores\nJerarquía visual clara y elementos de confianza",
+    "imagenes": "assets/images/proyectos/p1/1.png\nassets/images/proyectos/p1/2.png\nassets/images/proyectos/p1/3.png\nassets/images/proyectos/p1/4.png"
+  },
+  {
+    "proyecto": "Dotech — Radicador Documental Inteligente",
+    "contexto": "Dotech (Edotech) es una plataforma de gestión documental para entidades públicas colombianas. Permite radicar, asignar y hacer seguimiento de documentos con control de vencimientos, trazabilidad completa y auditoría integrada.",
+    "rol": "Rediseño del flujo de radicación y seguimiento\nPantalla de inicio de sesión institucional\nPanel de control con estados (En Gestión, Asignado, En Revisión)\nDashboard con métricas y tabla de radicados",
+    "imagenes": "assets/images/proyectos/p2/1.png\nassets/images/proyectos/p2/2.png"
+  },
+  {
+    "proyecto": "Fundación Ramírez Moreno — Rediseño Web",
+    "contexto": "Rediseño completo del sitio web de la Fundación Ramírez Moreno, una organización social que apoya instituciones colombianas a través de proyectos, donaciones y fortalecimiento institucional. El trabajo incluyó diagnóstico UX, arquitectura de información y sistema de diseño.",
+    "rol": "Sistema de diseño con paleta de color y tipografía\nFlujos de usuario para organizaciones postulantes\nRediseño de páginas: inicio, líneas de apoyo e inscripciones\nMejoras de accesibilidad y arquitectura de información",
+    "imagenes": "assets/images/proyectos/p3/2.png\nassets/images/proyectos/p3/3.png\nassets/images/proyectos/p3/4.png\nassets/images/proyectos/p3/5.png"
+  },
+  {
+    "proyecto": "GrowLink × Avellanedas Go — Sistema de Diseño y Sitio Web",
+    "contexto": "GrowLink es una plataforma de reseñas para negocios locales. Avellanedas Go es una panadería artesanal en La Calera, Cundinamarca. El proyecto implicó construir un sistema de diseño completo para GrowLink y diseñar el sitio web de Avellanedas Go como caso de uso real.",
+    "rol": "Definición de tokens de color, tipografía y componentes\nDiseño de componentes: formularios, navegación, tarjetas\nSitio web de Avellanedas Go: inicio y página de menú\nIntegración de identidad de marca artesanal al sistema digital",
+    "imagenes": "assets/images/proyectos/p4/1.png\nassets/images/proyectos/p4/2.png\nassets/images/proyectos/p4/3.png\nassets/images/proyectos/p4/4.png"
+  }
 ]
