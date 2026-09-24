@@ -1,0 +1,292 @@
+/* ============================================
+   PROJECTS — Proyectos
+   Controla los bloques de proyecto: etiqueta
+   lateral, contexto, rol y pantallas/mockups
+   ============================================ */
+
+/* La sección tiene padding arriba pero no abajo
+   porque el último proyecto termina con imágenes */
+.proyectos {
+  padding-top: var(--space-xl); /* 80px arriba */
+  padding-bottom: 0;
+}
+
+/* Párrafo introductorio debajo del título "proyectos".
+   max-width:700px evita líneas demasiado largas.
+   margin-top negativo lo acerca al título */
+.section-intro {
+  max-width: 700px;
+  font-size: 15px;
+  line-height: 1.8;
+  opacity: 0.75;
+  margin-top: -12px;  /* acerca al título */
+  margin-bottom: 64px;/* espacio antes del primer proyecto */
+}
+
+/* ---- Filtros de proyecto (generados por JS a partir de AJAX) ---- */
+
+/* Contenedor de botones de filtro, inyectado por portfolio.js
+   justo después de la intro y antes del primer bloque */
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: var(--max-width);
+  margin: 0 auto 48px;
+  padding: 0 var(--padding-x);
+}
+
+/* Botón de filtro en forma de pill, coherente con .pill de habilidades */
+.filter-btn {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--gray-lt);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+}
+
+/* Filtro activo: fondo rosado, texto blanco */
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
+
+/* ---- Bloque de proyecto ---- */
+
+/* Cada proyecto usa un grid de DOS columnas DESIGUALES:
+   - 260px fijo para la etiqueta (número + nombre)
+   - 1fr para todo el contenido (contexto, rol, pantallas)
+   border-top separa visualmente cada proyecto */
+.project-block {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 64px var(--padding-x);
+  border-top: 1px solid var(--gray-lt); /* línea separadora */
+  display: grid;
+  grid-template-columns: 260px 1fr;    /* etiqueta fija + contenido flexible */
+  gap: 64px;
+  align-items: start;                  /* alinea desde arriba */
+}
+
+/* Variante alternativa de proyecto.
+   !important garantiza que el fondo no cambie
+   si se modifica algo en el futuro */
+.project-block.alt {
+  background: var(--bg) !important;  /* mismo fondo que la página */
+  color: var(--ink) !important;      /* mismo color de texto */
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* En proyectos alt el número también es rosado */
+.project-block.alt .project-num { color: var(--accent); }
+
+/* ---- Etiqueta lateral (columna izquierda) ---- */
+
+/* El número "01", "02", etc.
+   Pequeño, rosado y en mayúsculas — funciona como eyebrow */
+.project-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;     /* espaciado elegante */
+  text-transform: uppercase;  /* MAYÚSCULAS desde CSS */
+  color: var(--accent);       /* rosado #C17A7A */
+  margin-bottom: 8px;
+}
+
+/* El nombre grande "primer proyecto", "segundo proyecto".
+   clamp lo hace responsivo: mín 40px, máx 64px */
+.project-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 5vw, 64px); /* responsivo automático */
+  line-height: 1;
+  letter-spacing: -0.03em;           /* letras más juntas */
+  margin-bottom: 14px;
+}
+
+/* Nombre real del proyecto en texto pequeño y tenue.
+   Ej: "EanMob — Plataforma de Movilidad..." */
+.project-subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  opacity: 0.5; /* muy tenue, información secundaria */
+}
+
+/* ---- Meta del proyecto (columna derecha, parte superior) ---- */
+
+/* Grid de dos columnas: Contexto izquierda, Mi rol derecha.
+   margin-bottom separa esta parte de las pantallas */
+.project-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dos columnas iguales */
+  gap: 32px;
+  margin-bottom: 40px;            /* espacio antes de las pantallas */
+}
+
+/* Títulos "CONTEXTO" y "MI ROL".
+   opacity:0.45 los hace muy tenues — son etiquetas
+   de orientación, no información principal */
+.project-col h4 {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.45;        /* casi invisible, solo orientación */
+  margin-bottom: 12px;
+}
+
+/* Lista de responsabilidades "Mi rol".
+   flex en columna apila los items verticalmente */
+.project-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 7px; /* espacio entre items de la lista */
+}
+
+/* Cada item de la lista.
+   position:relative permite posicionar la flecha → absolutamente.
+   padding-left:18px empuja el texto para que la flecha quepa */
+.project-col li {
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.85;
+  padding-left: 18px;  /* espacio para la flecha → */
+  position: relative;  /* necesario para la flecha absolute */
+}
+
+/* La flecha → antes de cada item.
+   position:absolute la posiciona en left:0
+   dentro del li (que tiene position:relative) */
+.project-col li::before {
+  content: '→';            /* flecha decorativa */
+  position: absolute;
+  left: 0;                 /* pegada al borde izquierdo del li */
+  color: var(--accent);    /* rosada */
+  font-size: 11px;
+  top: 2px;                /* ajuste fino vertical */
+}
+
+/* Texto de contexto del proyecto */
+.project-col p {
+  font-size: 13px;
+  line-height: 1.75;
+  opacity: 0.8;
+}
+
+/* ---- Pantallas / mockups ---- */
+
+/* Grid base de pantallas: 3 columnas por defecto */
+.project-screens {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+  gap: 16px;
+}
+
+/* 4 columnas para proyectos con pantallas verticales de móvil */
+.project-screens-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* 2 columnas para proyectos con mockups horizontales de desktop */
+.project-screens-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* 5 columnas para proyectos con muchas pantallas pequeñas */
+.project-screens-frm {
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+/* Cada imagen de pantalla.
+   object-fit:contain muestra la imagen COMPLETA sin recortar
+   (diferente a cover que recorta).
+   border gris da definición a imágenes con fondo claro */
+.project-img {
+  width: 100%;
+  height: auto;                      /* altura automática para no deformar */
+  display: block;
+  border-radius: var(--radius);      /* esquinas suaves 6px */
+  border: 1px solid var(--gray-lt);  /* borde gris sutil */
+  object-fit: contain;               /* imagen completa, sin recorte */
+}
+
+/* Clase legacy — ya no modifica nada,
+   se mantiene para compatibilidad */
+.project-img-landscape {
+  aspect-ratio: unset;
+  object-position: unset;
+}
+
+/* ---- Placeholders (mientras no hay imágenes reales) ---- */
+
+/* Cajas grises que se ven mientras los mockups
+   no están listos. Se reemplazan con <img> */
+.screen-placeholder {
+  border-radius: var(--radius);
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: italic;
+  background: #E0DFDD;   /* gris cálido similar al fondo */
+  color: var(--gray);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+/* Variantes dark/light del placeholder — mismo estilo.
+   Se pueden eliminar cuando estén las imágenes reales */
+.screen-placeholder.dark,
+.screen-placeholder.light {
+  background: #E0DFDD;
+  color: var(--gray);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+/* ---- Responsive ---- */
+
+/* En tablets y móviles (900px o menos):
+   el grid de dos columnas (etiqueta + contenido)
+   se convierte en una sola columna apilada */
+@media (max-width: 900px) {
+  .project-block {
+    grid-template-columns: 1fr; /* una sola columna */
+    gap: 32px;
+    padding: 48px var(--padding-x);
+  }
+
+  /* El meta también pasa a una sola columna */
+  .project-meta {
+    grid-template-columns: 1fr;
+  }
+
+  /* Las pantallas pasan a dos columnas en tablet */
+  .project-screens {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* En móvil pequeño (480px o menos):
+   las pantallas se apilan en una sola columna */
+@media (max-width: 480px) {
+  .project-screens {
+    grid-template-columns: 1fr;
+  }
+}

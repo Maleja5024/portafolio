@@ -1,0 +1,144 @@
+/* ============================================
+   EDUCATION — Educación
+   Controla la entrada de estudios, imagen
+   y el grid de certificaciones
+   ============================================ */
+
+/* Padding vertical de la sección completa */
+.educacion {
+  padding-top: var(--space-xl);    /* 80px arriba */
+  padding-bottom: var(--space-xl); /* 80px abajo */
+}
+
+/* ---- Entrada de estudios ---- */
+
+/* Apila carrera, universidad, ciudad y fecha
+   con muy poco espacio entre ellos (4px)
+   porque son datos relacionados que van juntos */
+.edu-entry {
+  display: flex;
+  flex-direction: column; /* apila verticalmente */
+  gap: 4px;               /* espacio mínimo entre líneas */
+}
+
+/* Nombre de la carrera en negrita y más grande */
+.edu-entry strong {
+  font-family: var(--font-display); /* Space Grotesk */
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* Universidad, ciudad — información secundaria,
+   más pequeña y semi-transparente */
+.edu-entry span {
+  font-size: 14px;
+  opacity: 0.7; /* 70% visible, más tenue que el título */
+}
+
+/* La fecha "2024 – Presente" en rosado y negrita.
+   !important fuerza que gane sobre opacity:0.7
+   que viene de .edu-entry span arriba */
+.edu-date {
+  color: var(--accent) !important; /* rosado #C17A7A, forzado */
+  font-weight: 600;
+  opacity: 1 !important;           /* opacidad completa, forzada */
+}
+
+/* Descripción larga debajo de los datos.
+   line-height:1.75 da aire para leer cómodo */
+.edu-desc {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.75;
+  opacity: 0.8; /* ligeramente tenue */
+}
+
+/* ---- Imagen de estudios ---- */
+
+/* Foto de café + laptop de la sección educación.
+   object-position:center center recorta desde el centro
+   en ambos ejes (no hay cara que preservar aquí) */
+.estudios-img {
+  width: 100%;
+  aspect-ratio: 4 / 4;              /* proporción cuadrada */
+  object-fit: cover;                /* recorta sin deformar */
+  object-position: center center;   /* recorte centrado */
+  border-radius: 4px;               /* esquinas suaves */
+  display: block;
+}
+
+/* ---- Certificaciones ---- */
+
+/* Título "Cursos y certificaciones relevantes".
+   clamp hace el tamaño responsivo: mín 20px, máx 28px.
+   margin-top:80px separa claramente del bloque de estudios */
+.certs-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(20px, 2.5vw, 28px); /* responsivo automático */
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-md);       /* 32px debajo del título */
+  margin-top: var(--space-xl);          /* 80px encima del título */
+}
+
+/* Grid de certificaciones.
+   repeat(5, 1fr) crea 5 columnas iguales automáticamente.
+   Una certificación por columna en desktop */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 columnas iguales */
+  gap: 14px;                             /* espacio entre tarjetas */
+}
+
+/* Cada tarjeta de certificación.
+   flex en columna: proveedor arriba, nombre del curso abajo.
+   transition anima borde y sombra suavemente al hacer hover */
+.cert-card {
+  background: var(--white);             /* fondo blanco */
+  border-radius: var(--radius);         /* esquinas suaves 6px */
+  padding: 18px 20px;                   /* espacio interno */
+  border: 1px solid var(--gray-lt);     /* borde gris claro */
+  transition: border-color 0.2s, box-shadow 0.2s; /* animación suave */
+  display: flex;
+  flex-direction: column;               /* proveedor arriba, curso abajo */
+  gap: 6px;                             /* espacio entre proveedor y curso */
+}
+
+/* Al hacer hover la tarjeta resalta:
+   borde rosado y sombra rosada sutil */
+.cert-card:hover {
+  border-color: var(--accent);                      /* borde rosado */
+  box-shadow: 0 4px 16px rgba(193, 122, 122, 0.12); /* sombra rosada */
+}
+
+/* El nombre del proveedor: Google, Platzi, EAN X.
+   display:block convierte el span inline en bloque
+   para que ocupe su propia línea */
+.cert-provider {
+  display: block;               /* ocupa su propia línea */
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;        /* espaciado elegante entre letras */
+  text-transform: uppercase;    /* MAYÚSCULAS desde CSS */
+  color: var(--accent);         /* rosado #C17A7A */
+}
+
+/* Nombre del curso debajo del proveedor */
+.cert-card p {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ---- Responsive ---- */
+
+/* En tablets (1024px o menos):
+   de 5 columnas pasa a 3 columnas */
+@media (max-width: 1024px) {
+  .certs-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* En móvil (640px o menos):
+   de 3 columnas pasa a 2 columnas */
+@media (max-width: 640px) {
+  .certs-grid { grid-template-columns: repeat(2, 1fr); }
+}

@@ -1,0 +1,77 @@
+/* ============================================
+   NAV — Barra de navegación
+   Aparece fija en la parte superior de la página
+   y se mantiene visible mientras el usuario scrollea
+   ============================================ */
+
+/* Contenedor principal del nav.
+   position:fixed lo mantiene pegado arriba siempre.
+   top/left/right:0 lo ancla a los tres bordes superiores.
+   z-index:100 garantiza que aparezca por encima de todo el contenido */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+
+  /* Flexbox pone tagline y enlaces en fila horizontal.
+     space-between: tagline a la izquierda, enlaces a la derecha.
+     align-items:center los centra verticalmente */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px var(--padding-x);         /* espacio interno del nav */
+  background: var(--bg);                  /* mismo fondo gris que la página */
+  border-bottom: 1px solid var(--gray-lt);/* línea divisora sutil abajo */
+}
+
+/* Tagline de la izquierda:
+   "Diseño de Experiencias Digitales con Significado" */
+.nav-tagline {
+  font-family: var(--font-display); /* Space Grotesk */
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+/* Contenedor de los enlaces del menú.
+   display:flex los pone en fila con espacio entre ellos */
+.nav-links {
+  display: flex;
+  gap: 28px; /* espacio entre cada enlace */
+}
+
+/* Estilo base de cada enlace del menú.
+   opacity:0.6 los hace discretos por defecto.
+   transition hace que el cambio de opacidad sea suave (0.2s) */
+.nav-links a {
+  font-family: var(--font-body); /* DM Sans */
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.6;                  /* 60% visible en estado normal */
+  transition: opacity 0.2s;      /* animación suave al hacer hover */
+}
+
+/* Cuando el mouse pasa por encima del enlace,
+   sube la opacidad al 100% — efecto hover suave */
+.nav-links a:hover {
+  opacity: 1;
+}
+
+/* ---- Responsive ---- */
+
+/* En pantallas de 900px o menos (tablets y móviles):
+   los enlaces del menú se ocultan completamente.
+   Solo queda visible el tagline.
+   (En una versión con JavaScript iría el menú hamburguesa aquí) */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none; /* oculta todos los enlaces en móvil */
+  }
+
+  .nav {
+    padding: 16px var(--padding-x); /* reduce un poco el padding en móvil */
+  }
+}

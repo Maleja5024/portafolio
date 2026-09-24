@@ -1,0 +1,128 @@
+/* ============================================
+   HERO — Pantalla de bienvenida
+   Primera sección que ve el visitante.
+   Ocupa el 100% de la altura de la pantalla.
+   ============================================ */
+
+/* Contenedor principal del hero.
+   position:relative permite que el aura y los contactos
+   se posicionen absolutamente dentro de él.
+   min-height:100vh ocupa toda la altura de la pantalla.
+   flex centra el contenido vertical y horizontalmente */
+.hero {
+  position: relative;
+  min-height: 100vh;                    /* 100% de la altura visible */
+  display: flex;
+  flex-direction: column;               /* apila elementos verticalmente */
+  align-items: center;                  /* centra horizontalmente */
+  justify-content: center;              /* centra verticalmente */
+  padding: var(--space-2xl) var(--padding-x) var(--space-xl);
+  overflow: hidden;                     /* esconde lo que se salga del hero */
+}
+
+/* Círculo decorativo rosado de fondo (el glow/aura).
+   position:absolute lo saca del flujo y lo posiciona
+   en relación al .hero (su padre con position:relative).
+   top/left:50% + translate(-50%,-50%) lo centra perfectamente.
+   pointer-events:none hace que el mouse lo ignore */
+.hero-aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);     /* centra el círculo exactamente */
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;                   /* convierte el div en círculo */
+
+  /* Degradado radial: rosado en el centro, transparente en los bordes */
+  background: radial-gradient(
+    circle,
+    rgba(193, 122, 122, 0.22) 0%,      /* rosado al 22% en el centro */
+    transparent 70%                     /* desvanece a transparente */
+  );
+  pointer-events: none;                 /* decorativo: el mouse lo ignora */
+}
+
+/* Contenedor del título — ancho completo, centrado */
+.hero-content {
+  width: 100%;
+  text-align: center;
+  position: relative;                   /* necesario para z-index */
+  z-index: 2;                          /* por encima del aura */
+}
+
+/* El título gigante "portafolio".
+   position:relative permite que el nombre flote sobre él.
+   clamp hace el tamaño responsivo automáticamente:
+   mínimo 72px, ideal 12% del ancho, máximo 160px */
+.hero-title {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-display);     /* Space Grotesk */
+  font-weight: 700;
+  font-size: clamp(72px, 12vw, 160px); /* responsivo automático */
+  line-height: 1;
+  letter-spacing: -0.03em;             /* letras ligeramente más juntas */
+  color: var(--ink);                   /* negro #1A1A1A */
+}
+
+/* La palabra "portafolio" en una sola línea */
+.hero-word {
+  display: inline;
+}
+
+/* Tu nombre "María Alejandra" en Dancing Script rosado.
+   Flota encima de "portafolio" usando position:absolute.
+   top/left:50% + translate(-50%,-50%) lo centra perfectamente
+   sobre toda la palabra.
+   z-index:3 lo pone por encima del texto negro */
+.name-script {
+  font-family: var(--font-script);      /* Dancing Script */
+  font-size: clamp(32px, 5.5vw, 72px); /* responsivo: mín 32px, máx 72px */
+  font-weight: 600;
+  color: var(--accent);                /* rosado #C17A7A */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);    /* centra sobre "portafolio" */
+  white-space: nowrap;                 /* nunca se parte en dos líneas */
+  z-index: 3;                         /* por encima del título negro */
+  pointer-events: none;               /* decorativo: el mouse lo ignora */
+  line-height: 1;
+}
+
+/* Los tres datos de contacto en la parte inferior del hero.
+   position:absolute + bottom los ancla al fondo del hero.
+   left:0 y right:0 le dan ancho completo para centrar con flex.
+   opacity:0.55 los hace discretos */
+.hero-contacts {
+  position: absolute;
+  bottom: var(--space-lg);             /* 48px desde el borde inferior */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;            /* centra los tres contactos */
+  gap: var(--space-lg);               /* 48px entre cada contacto */
+  font-size: 13px;
+  opacity: 0.55;                      /* semi-transparentes, discretos */
+  font-family: var(--font-body);      /* DM Sans */
+}
+
+/* ---- Responsive ---- */
+
+/* En móvil los contactos se apilan verticalmente
+   y se reducen de tamaño */
+@media (max-width: 768px) {
+  .hero-contacts {
+    flex-direction: column;           /* de fila pasa a columna */
+    align-items: center;
+    gap: var(--space-xs);             /* menos espacio entre ellos */
+    font-size: 11px;
+  }
+
+  /* El aura se reduce para no ocupar toda la pantalla en móvil */
+  .hero-aura {
+    width: 320px;
+    height: 320px;
+  }
+}

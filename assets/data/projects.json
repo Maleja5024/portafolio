@@ -1,0 +1,6 @@
+[
+  { "id": "p1", "categoria": "App Móvil", "slug": "app-movil" },
+  { "id": "p2", "categoria": "Dashboard", "slug": "dashboard" },
+  { "id": "p3", "categoria": "Sitio Web", "slug": "sitio-web" },
+  { "id": "p4", "categoria": "Sistema de Diseño", "slug": "sistema-diseno" }
+]

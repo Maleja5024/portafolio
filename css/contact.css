@@ -1,0 +1,122 @@
+/* ============================================
+   CONTACT — Contacto
+   Controla el cierre del portafolio:
+   título gigante, párrafo y botones de contacto
+   ============================================ */
+
+/* Sección centrada con el mismo fondo de la página.
+   text-align:center centra todo el texto de una vez */
+.contacto {
+  background: var(--bg);
+  text-align: center;
+  padding-top: var(--space-xl);    /* 80px arriba */
+  padding-bottom: var(--space-xl); /* 80px abajo */
+}
+
+/* Contenedor interior.
+   flex en columna apila título, párrafo y botones.
+   align-items:center los centra horizontalmente */
+.contacto-inner {
+  display: flex;
+  flex-direction: column; /* apila elementos verticalmente */
+  align-items: center;    /* centra horizontalmente */
+}
+
+/* ---- Título gigante "gracias" ---- */
+
+/* El título más grande del sitio.
+   clamp(80px, 14vw, 180px) — rango mayor que el hero
+   porque es el cierre impactante del portafolio */
+.contacto-title {
+  font-family: var(--font-display); /* Space Grotesk */
+  font-weight: 700;
+  font-size: clamp(80px, 14vw, 180px); /* responsivo: mín 80px, máx 180px */
+  line-height: 1;
+  letter-spacing: -0.03em;             /* letras más juntas */
+  margin-bottom: var(--space-md);      /* espacio antes del párrafo */
+}
+
+/* Clase legacy — ya no se usa en el HTML actual */
+.big-script {
+  display: none;
+}
+
+/* ---- Párrafo de invitación ---- */
+
+/* Texto debajo del título.
+   max-width:520px evita líneas demasiado largas
+   (importante para legibilidad de texto centrado).
+   opacity:0.7 lo hace secundario respecto al título */
+.contacto-sub {
+  font-size: 16px;
+  line-height: 1.75;
+  max-width: 520px;          /* ancho máximo para legibilidad */
+  opacity: 0.7;              /* tenue, información secundaria */
+  margin-bottom: var(--space-lg); /* 48px antes de los botones */
+}
+
+/* ---- Botones de contacto ---- */
+
+/* Contenedor de los tres botones.
+   flex-wrap:wrap permite que salten a la siguiente línea
+   si no caben en una sola fila */
+.contact-links {
+  display: flex;
+  gap: 24px;               /* espacio entre botones */
+  flex-wrap: wrap;         /* salto de línea si no caben */
+  justify-content: center; /* centra los botones */
+}
+
+/* Cada botón de contacto.
+   inline-flex permite que el botón ocupe solo el espacio
+   que necesita (no todo el ancho como block).
+   align-items:center centra ícono y texto verticalmente.
+   border:2px más grueso que tarjetas (1px) para más peso visual.
+   border-radius:100px forma de cápsula ovalada */
+.contact-link {
+  display: inline-flex;
+  align-items: center;              /* ícono y texto centrados */
+  gap: 10px;                        /* espacio entre ícono y texto */
+  font-family: var(--font-display); /* Space Grotesk */
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 24px;               /* espacio interno del botón */
+  border: 2px solid var(--ink);     /* borde negro grueso */
+  border-radius: var(--radius-pill);/* forma de cápsula 100px */
+
+  /* Anima tres propiedades suavemente al hacer hover */
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* Al hacer hover el botón se invierte completamente:
+   fondo negro, texto blanco/gris claro.
+   El ícono SVG también cambia porque usa currentColor */
+.contact-link:hover {
+  background: var(--ink); /* fondo negro */
+  color: var(--bg);       /* texto gris claro */
+}
+
+/* El ícono SVG nunca se encoge dentro del flex
+   aunque el botón sea pequeño */
+.contact-link svg {
+  flex-shrink: 0; /* tamaño fijo siempre */
+}
+
+/* ---- Responsive ---- */
+
+/* En móvil (600px o menos):
+   los tres botones se apilan verticalmente.
+   Cada botón ocupa el ancho completo hasta 300px */
+@media (max-width: 600px) {
+  .contact-links {
+    flex-direction: column; /* de fila pasa a columna */
+    align-items: center;
+    gap: 14px;
+  }
+
+  .contact-link {
+    width: 100%;            /* ocupa el ancho completo */
+    max-width: 300px;       /* pero nunca más de 300px */
+    justify-content: center;/* centra ícono y texto */
+  }
+}

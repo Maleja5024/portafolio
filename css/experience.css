@@ -1,0 +1,138 @@
+/* ============================================
+   EXPERIENCE — Experiencia laboral
+   Controla la fila superior título+foto
+   y las tarjetas de cada trabajo
+   ============================================ */
+
+/* Padding vertical de la sección completa */
+.experiencia {
+  padding-top: var(--space-xl);    /* 80px arriba */
+  padding-bottom: var(--space-xl); /* 80px abajo */
+}
+
+/* ---- Fila superior: título izquierda, foto derecha ---- */
+
+/* Mismo patrón que sobre-top en about.css.
+   margin-bottom:56px separa esta fila
+   de las tarjetas que vienen debajo */
+.exp-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dos columnas iguales */
+  gap: 48px;
+  align-items: start;             /* alineación desde arriba */
+  margin-bottom: 56px;            /* espacio antes de las tarjetas */
+}
+
+/* Sobreescribe solo la foto de experiencia sin afectar
+   la foto de perfil de Sobre mí.
+   El selector más específico (.exp-foto .profile-img)
+   gana sobre el selector general (.profile-img) */
+.exp-foto .profile-img {
+  aspect-ratio: 4 / 3;          /* horizontal, más ancha que alta */
+  object-position: center center;/* recorte centrado */
+  min-height: unset;             /* elimina el min-height:560px heredado */
+}
+
+/* ---- Tarjetas apiladas de experiencia ---- */
+
+/* Contenedor de las cuatro tarjetas.
+   flex en columna las apila verticalmente.
+   gap:16px pequeño porque son parte de la misma lista */
+.exp-cards {
+  display: flex;
+  flex-direction: column; /* apila tarjetas verticalmente */
+  gap: 16px;              /* espacio pequeño entre tarjetas */
+}
+
+/* Cada tarjeta individual.
+   border-radius:12px más redondeado que las cert-cards (6px).
+   padding:28px 32px — más espacio horizontal que vertical
+   porque el contenido es texto largo */
+.exp-card {
+  border: 1px solid var(--gray-lt);    /* borde gris claro */
+  border-radius: var(--radius-lg);     /* esquinas redondeadas 12px */
+  padding: 28px 32px;                  /* espacio interno */
+  background: var(--white);            /* fondo blanco */
+  transition: border-color 0.2s, box-shadow 0.2s; /* animación suave */
+}
+
+/* Al hacer hover la tarjeta resalta:
+   borde rosado y sombra rosada sutil */
+.exp-card:hover {
+  border-color: var(--accent);                      /* borde rosado */
+  box-shadow: 0 4px 20px rgba(193, 122, 122, 0.1); /* sombra rosada */
+}
+
+/* Header de la tarjeta: cargo+empresa a la izquierda,
+   fecha a la derecha.
+   justify-content:space-between los separa automáticamente.
+   align-items:flex-start alinea desde arriba por si el
+   cargo ocupa dos líneas */
+.exp-card-header {
+  display: flex;
+  justify-content: space-between; /* cargo izq, fecha der */
+  align-items: flex-start;        /* alineación desde arriba */
+  gap: 24px;                      /* espacio mínimo entre cargo y fecha */
+  margin-bottom: 14px;            /* espacio antes de la descripción */
+}
+
+/* El div sin clase que agrupa cargo y empresa juntos.
+   flex en columna los apila con poco espacio entre ellos */
+.exp-card-header div {
+  display: flex;
+  flex-direction: column; /* cargo arriba, empresa abajo */
+  gap: 4px;               /* espacio mínimo entre ambos */
+}
+
+/* Nombre del cargo en negrita */
+.exp-card-header strong {
+  font-family: var(--font-display); /* Space Grotesk */
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Nombre de la empresa en rosado y semi-negrita.
+   El color acento le da jerarquía visual */
+.exp-company {
+  font-size: 13px;
+  color: var(--accent); /* rosado #C17A7A */
+  font-weight: 600;
+}
+
+/* La fecha "2026 – Presente" en gris, itálica y pequeña.
+   white-space:nowrap evita que se parta en dos líneas.
+   flex-shrink:0 evita que se encoja dentro del flexbox */
+.exp-date {
+  font-size: 12px;
+  opacity: 0.5;            /* muy tenue, información secundaria */
+  font-style: italic;
+  white-space: nowrap;     /* nunca se parte en dos líneas */
+  flex-shrink: 0;          /* nunca se encoge dentro del flex */
+}
+
+/* Descripción del trabajo.
+   opacity:0.75 la hace un poco tenue
+   porque es texto secundario */
+.exp-card p {
+  font-size: 14px;
+  line-height: 1.75; /* interlineado generoso para texto largo */
+  opacity: 0.75;     /* ligeramente tenue */
+}
+
+/* ---- Responsive ---- */
+
+/* En tablets y móviles (900px o menos):
+   título y foto se apilan en una sola columna */
+@media (max-width: 900px) {
+  .exp-top {
+    grid-template-columns: 1fr; /* una sola columna */
+    gap: 32px;
+  }
+
+  /* El header de la tarjeta también se apila:
+     cargo+empresa arriba, fecha abajo */
+  .exp-card-header {
+    flex-direction: column; /* de fila pasa a columna */
+    gap: 8px;
+  }
+}

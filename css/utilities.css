@@ -1,0 +1,120 @@
+/* ============================================
+   UTILITIES — Marquee, Wavy Dividers, helpers
+   Elementos compartidos que no pertenecen a
+   ninguna sección específica del sitio
+   ============================================ */
+
+/* ---- MARQUEE ---- */
+
+/* La "ventana" del marquee.
+   overflow:hidden esconde el texto que se sale por los lados.
+   Los bordes rosados enmarcan la franja del texto animado */
+.marquee-wrap {
+  overflow: hidden;
+  padding: 14px 0;
+  background: transparent;
+  border-top: 1px solid rgba(193, 122, 122, 0.35);    /* línea rosada arriba */
+  border-bottom: 1px solid rgba(193, 122, 122, 0.35); /* línea rosada abajo */
+}
+
+/* El contenedor interior que se mueve de derecha a izquierda.
+   white-space:nowrap evita que el texto salte a otra línea */
+.marquee-track {
+  display: flex;
+  gap: 32px;                          /* espacio entre cada palabra */
+  white-space: nowrap;                /* todo en una sola fila horizontal */
+  animation: marquee 22s linear infinite; /* animación continua cada 22s */
+  font-family: var(--font-display);   /* Space Grotesk */
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* El punto separador · entre palabras se pinta en rosado */
+.marquee-track .dot {
+  color: var(--accent);
+}
+
+/* Definición de la animación del marquee.
+   Mueve el track -50% hacia la izquierda (no -100% porque
+   el texto está duplicado en HTML para que el loop sea continuo
+   y sin cortes visibles) */
+@keyframes marquee {
+  0%   { transform: translateX(0); }     /* posición inicial */
+  100% { transform: translateX(-50%); }  /* posición final: mitad del recorrido */
+}
+
+/* Accesibilidad: si el usuario configuró "reducir movimiento"
+   en su sistema operativo, la animación se detiene */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ---- DIVISOR ONDULADO SVG ---- */
+
+/* Contenedor de la línea ondulada rosada entre secciones.
+   line-height:0 elimina el espacio extra debajo del SVG */
+.wavy-divider {
+  width: 100%;
+  line-height: 0;
+  overflow: visible;
+  padding: 10px 0;
+}
+
+/* El SVG se estira al 100% del ancho de la pantalla.
+   La onda siempre va de borde a borde */
+.wavy-divider svg {
+  width: 100%;
+  height: 32px;
+  display: block;
+  overflow: visible;
+}
+
+/* Clase extra por si se necesita voltear la onda
+   (actualmente sin transformación aplicada) */
+.wavy-flip {
+  transform: none;
+}
+
+/* ---- ROLE TAGS (etiquetas de rol) ---- */
+
+/* Las etiquetas rosadas de "Diseño UX", "Investigación UX", etc.
+   Solo tienen borde y texto en rosado, sin fondo (estilo outline) */
+.role-tag {
+  font-family: var(--font-display);  /* Space Grotesk */
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;          /* texto en MAYÚSCULAS */
+  border: 1px solid var(--accent);   /* borde rosado */
+  color: var(--accent);              /* texto rosado */
+  padding: 6px 16px;
+  border-radius: var(--radius-pill); /* forma de cápsula ovalada */
+  display: inline-block;
+}
+
+/* ---- FOOTER ---- */
+
+/* Pie de página con tagline a la izquierda y copyright a la derecha.
+   justify-content:space-between los separa automáticamente.
+   opacity:0.55 lo hace discreto para no competir con el contenido */
+.footer {
+  padding: 24px var(--padding-x);
+  border-top: 1px solid var(--gray-lt); /* línea divisora arriba */
+  display: flex;
+  justify-content: space-between;       /* tagline izq, copyright der */
+  align-items: center;
+  font-size: 12px;
+  opacity: 0.55;                        /* semi-transparente, discreto */
+}
+
+/* En móvil el footer se apila verticalmente y se centra */
+@media (max-width: 600px) {
+  .footer {
+    flex-direction: column; /* de fila pasa a columna */
+    gap: 6px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,40 @@
+/* ============================================
+   TOKENS DE DISEÑO — María Alejandra Rozo
+   ============================================ */
+
+:root {
+  /* Colores */
+  --bg:        #EDEDEB;   /* fondo gris cálido de toda la página */
+  --ink:       #1A1A1A;   /* negro casi puro para el texto */
+  --accent:    #C17A7A;   /* tu rosado de marca */
+  --accent-lt: rgba(193, 122, 122, 0.12);  /* rosado muy transparente */
+  --white:     #FFFFFF;   /* blanco puro para tarjetas */
+  --gray:      #888888;   /* gris medio para texto secundario */
+  --gray-lt:   #D5D5D3;   /* gris claro para bordes */
+
+  /* Tipografías */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-script:  'Dancing Script', cursive;
+
+  /* Espaciado */
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  32px;
+  --space-lg:  48px;
+  --space-xl:  80px;
+  --space-2xl: 120px;
+
+  /* Contenedor */
+  --max-width: 1200px;
+  --padding-x: 48px;
+
+  /* Bordes */
+  --radius:    6px;
+  --radius-lg: 12px;
+  --radius-pill: 100px;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(193, 122, 122, 0.12);
+}

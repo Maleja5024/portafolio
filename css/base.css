@@ -1,0 +1,168 @@
+/* ============================================
+   BASE — Reset y estilos globales
+   ============================================ */
+
+/* Aplica a TODOS los elementos de la página.
+   Elimina márgenes y rellenos por defecto del navegador.
+   border-box hace que el padding NO sume al ancho total */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Scroll suave al hacer clic en los enlaces del nav (#sobre-mi, etc.)
+   antialiased hace el texto más nítido en pantallas Mac/Safari */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Estilos base de toda la página */
+body {
+  background: var(--bg);        /* fondo gris cálido #EDEDEB */
+  color: var(--ink);            /* texto negro #1A1A1A */
+  font-family: var(--font-body);/* DM Sans como fuente base */
+  font-size: 16px;              /* tamaño base de todo el texto */
+  line-height: 1.65;            /* interlineado cómodo para leer */
+  overflow-x: hidden;           /* evita scroll horizontal indeseado */
+}
+
+/* Imágenes responsivas por defecto:
+   - nunca más anchas que su contenedor
+   - block elimina el espacio raro que aparece debajo
+   - border-radius da esquinas suaves a todas las imágenes */
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: var(--radius);
+}
+
+/* Elimina el azul y subrayado de los enlaces por defecto.
+   inherit = heredan el color del texto que los rodea */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Elimina las viñetas de todas las listas.
+   En el portafolio usamos flechas → personalizadas */
+ul {
+  list-style: none;
+}
+
+/* ---- Secciones ---- */
+
+/* Padding vertical de 80px en todas las secciones.
+   El 0 significa sin padding izquierda ni derecha */
+.section {
+  padding: var(--space-xl) 0;
+}
+
+/* Contenedor interior de cada sección:
+   - max-width limita el ancho a 1200px
+   - margin: 0 auto centra el bloque horizontalmente
+   - padding lateral da respiro a los lados */
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--padding-x);
+}
+
+/* ---- Eyebrow (etiqueta pequeña sobre los títulos) ---- */
+
+/* Texto pequeño en rosado que aparece sobre cada título de sección.
+   Ej: "introducción", "trayectoria", "mi formación" */
+.section-eyebrow {
+  font-family: var(--font-display); /* Space Grotesk */
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;          /* espaciado entre letras elegante */
+  text-transform: uppercase;        /* convierte a MAYÚSCULAS desde CSS */
+  color: var(--accent);            /* rosado #C17A7A */
+  margin-bottom: var(--space-sm);  /* espacio debajo antes del título */
+}
+
+/* ---- Títulos XL ---- */
+
+/* Título gigante de cada sección.
+   clamp(mínimo, ideal, máximo) lo hace automáticamente responsivo:
+   - mínimo: 48px (móvil)
+   - ideal: 7% del ancho de pantalla
+   - máximo: 96px (pantallas grandes) */
+.section-title-xl {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 1;
+  letter-spacing: -0.03em;         /* letras ligeramente más juntas */
+  margin-bottom: var(--space-md);
+}
+
+/* ---- Nombre en script (Dancing Script rosado) ---- */
+
+/* Usado en el hero y en la sección Sobre mí
+   para el nombre "María Alejandra" en cursiva */
+.accent-script {
+  font-family: var(--font-script);  /* Dancing Script */
+  font-weight: 600;
+  color: var(--accent);             /* rosado #C17A7A */
+  font-size: 0.85em;                /* 85% del tamaño del h2 que lo contiene */
+}
+
+/* ---- Layout split 50/50 ---- */
+
+/* Divide el contenido en dos columnas iguales.
+   Usado en Educación y Experiencia (título+foto) */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* dos columnas de igual tamaño */
+  gap: var(--space-xl);            /* 80px entre columnas */
+  align-items: start;              /* alinea desde arriba, no desde el centro */
+}
+
+/* ---- Placeholders de imágenes ---- */
+
+/* Caja gris para mostrar mientras no hay imagen real.
+   Se reemplaza con <img> cuando las fotos están listas */
+.photo-placeholder {
+  background: var(--gray-lt);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* Variante ancha (para imágenes paisaje) */
+.photo-placeholder.photo-wide { width: 100%; height: 340px; }
+
+/* Variante alta (para retratos/fotos verticales) */
+.photo-placeholder.photo-tall { width: 100%; height: 480px; }
+
+/* ---- Responsive ---- */
+
+/* En pantallas de 900px o menos (tablets y móviles): */
+@media (max-width: 900px) {
+
+  /* Reduce el padding lateral de 48px a 24px
+     para dar más espacio al contenido */
+  :root {
+    --padding-x: 24px;
+  }
+
+  /* Las dos columnas se apilan en una sola columna */
+  .split {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+/* Si el usuario activó "reducir movimiento" en su sistema operativo
+   (por epilepsia u otras condiciones), desactiva el scroll suave.
+   Es una decisión de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

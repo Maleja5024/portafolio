@@ -1,0 +1,186 @@
+/* ============================================
+   SKILLS — Habilidades
+   Controla el grid de dos columnas, pills,
+   íconos de software y barras de idiomas
+   ============================================ */
+
+/* Fondo de la sección igual al fondo general de la página */
+.habilidades { background: var(--bg); }
+
+/* ---- Grid principal de dos columnas ---- */
+
+/* Divide la sección en columna izquierda (pills)
+   y columna derecha (herramientas + idiomas).
+   gap:56px da espacio generoso entre ambas columnas */
+.skills-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dos columnas iguales */
+  gap: 56px;                      /* espacio entre columnas */
+  margin-top: 56px;               /* espacio después del título */
+}
+
+/* Ambas columnas se comportan igual internamente:
+   flex en columna apila los bloques verticalmente.
+   gap:48px da espacio entre cada bloque dentro de la columna.
+   La coma aplica el mismo estilo a las dos clases a la vez */
+.skills-col-left,
+.skills-col-right {
+  display: flex;
+  flex-direction: column; /* apila bloques verticalmente */
+  gap: 48px;              /* espacio entre bloques */
+}
+
+/* ---- Encabezado de cada bloque ---- */
+
+/* Título de cada grupo: "Habilidades técnicas", "Idiomas", etc.
+   border-bottom crea una línea negra gruesa debajo del título
+   que lo separa visualmente del contenido */
+.skills-heading {
+  font-family: var(--font-display); /* Space Grotesk */
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--ink); /* línea negra separadora */
+  padding-bottom: 10px;                /* espacio entre texto y línea */
+}
+
+/* ---- Pills de habilidades ---- */
+
+/* Contenedor de las pills.
+   flex-wrap:wrap permite que salten a la siguiente línea
+   si no caben todas en una sola fila */
+.soft-pills {
+  display: flex;
+  flex-wrap: wrap; /* salto de línea automático */
+  gap: 10px;       /* espacio entre pills */
+}
+
+/* Cada pill individual.
+   border-radius:var(--radius-pill) = 100px las hace ovaladas.
+   transition anima background y color suavemente al hacer hover */
+.pill {
+  font-family: var(--font-body);       /* DM Sans */
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;                   /* espacio interno de la cápsula */
+  border: 1.5px solid var(--ink);      /* borde negro */
+  border-radius: var(--radius-pill);   /* forma de cápsula ovalada */
+  background: transparent;             /* sin fondo por defecto */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: default;
+  transition: background 0.2s, color 0.2s; /* animación suave */
+}
+
+/* Pseudoelemento ::before inserta el símbolo ✦ antes
+   del texto de cada pill sin escribirlo en el HTML.
+   content define qué carácter se inserta */
+.pill::before {
+  content: '✦';         /* símbolo decorativo rosado */
+  font-size: 9px;
+  color: var(--accent); /* rosado #C17A7A */
+}
+
+/* Al hacer hover la pill se invierte:
+   fondo negro, texto blanco */
+.pill:hover {
+  background: var(--ink); /* fondo negro */
+  color: var(--bg);       /* texto blanco/gris claro */
+}
+
+/* ---- Íconos de software ---- */
+
+/* Contenedor que pone los íconos en fila con wrap */
+.software-logos {
+  display: flex;
+  flex-wrap: wrap;  /* saltan a la siguiente línea si no caben */
+  gap: 24px;
+  align-items: center;
+}
+
+/* Cada ítem: ícono arriba, nombre abajo.
+   flex-direction:column los apila verticalmente.
+   transition en opacity para efecto hover suave */
+.software-item {
+  display: flex;
+  flex-direction: column; /* ícono arriba, texto abajo */
+  align-items: center;
+  gap: 8px;               /* espacio entre ícono y nombre */
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.8;           /* ligeramente transparente por defecto */
+  transition: opacity 0.2s;
+}
+
+/* Al hacer hover el ícono se vuelve completamente opaco */
+.software-item:hover { opacity: 1; }
+
+/* La caja cuadrada que contiene el SVG del ícono.
+   background:white y box-shadow lo hacen parecer
+   una tarjeta flotante */
+.software-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-lg);   /* bordes redondeados 12px */
+  display: flex;
+  align-items: center;
+  justify-content: center;           /* centra el SVG dentro */
+  background: var(--white);          /* fondo blanco */
+  box-shadow: var(--shadow-sm);      /* sombra sutil flotante */
+}
+
+/* ---- Barras de idiomas ---- */
+
+/* Lista de idiomas apilados verticalmente */
+.idiomas-list { display: flex; flex-direction: column; gap: 20px; }
+
+/* Cada idioma: nombre, nivel y barra apilados */
+.idioma-item { display: flex; flex-direction: column; gap: 6px; }
+
+/* Nombre del idioma en negrita */
+.idioma-name {
+  font-family: var(--font-display); /* Space Grotesk */
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* Nivel del idioma en gris e itálica */
+.idioma-level {
+  font-size: 12px;
+  color: var(--gray);  /* gris #888888 */
+  font-style: italic;
+}
+
+/* La barra gris de fondo (contenedor vacío).
+   overflow:hidden recorta la barra rosada interior
+   para que respete los bordes redondeados */
+.idioma-bar {
+  width: 100%;
+  height: 4px;                      /* barra muy delgada */
+  background: var(--gray-lt);       /* gris claro de fondo */
+  border-radius: 2px;
+  overflow: hidden;                  /* recorta la barra interior */
+}
+
+/* La barra rosada interior.
+   Su ancho viene del HTML: style="width:100%" o style="width:55%"
+   porque cada idioma tiene un porcentaje diferente */
+.idioma-fill {
+  height: 100%;
+  background: var(--accent); /* rosado #C17A7A */
+  border-radius: 2px;
+}
+
+/* ---- Responsive ---- */
+
+/* En tablets y móviles (900px o menos):
+   las dos columnas se apilan en una sola */
+@media (max-width: 900px) {
+  .skills-grid-2col {
+    grid-template-columns: 1fr; /* una sola columna */
+    gap: 40px;
+  }
+}
