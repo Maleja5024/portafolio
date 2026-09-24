@@ -1,0 +1,61 @@
+/* Puente entre Bootstrap y los tokens del portafolio */
+:root {
+  --bs-body-font-family: var(--font-body);
+  --bs-body-bg: var(--bg);
+  --bs-body-color: var(--ink);
+  --bs-border-color: var(--gray-lt);
+}
+
+.site-nav {
+  background: var(--bg);
+  border-bottom: 1px solid var(--gray-lt);
+  padding: 12px 0;
+}
+.site-nav .navbar-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  margin: 0;
+  white-space: normal;
+}
+.site-nav .nav-link {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.site-nav .nav-link:hover,
+.site-nav .nav-link.active { opacity: 1; }
+
+.page-top { padding-top: 96px; }
+
+.btn-brand {
+  --bs-btn-bg: var(--accent);
+  --bs-btn-border-color: var(--accent);
+  --bs-btn-color: var(--white);
+  --bs-btn-hover-bg: #a86363;
+  --bs-btn-hover-border-color: #a86363;
+  --bs-btn-hover-color: var(--white);
+  --bs-btn-active-bg: #a86363;
+  --bs-btn-active-border-color: #a86363;
+  --bs-btn-active-color: var(--white);
+  --bs-btn-disabled-bg: var(--accent);
+  --bs-btn-disabled-border-color: var(--accent);
+  font-family: var(--font-display);
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+}
+
+.form-control,
+.form-control:focus {
+  border-radius: var(--radius);
+  background: var(--white);
+}
+.form-control:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem var(--accent-lt);
+}
+.form-label { font-family: var(--font-display); font-weight: 600; font-size: 14px; }
