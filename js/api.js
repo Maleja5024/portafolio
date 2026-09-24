@@ -7,9 +7,11 @@
     const doFetch = fetchFn || function () { return fetch.apply(null, arguments); };
 
     async function call(url, key, body) {
-      const res = await doFetch(url, {
+      // Petición "simple" (text/plain, sin cabeceras propias): el navegador no hace preflight
+      // CORS, que Retool rechaza con 401 porque OPTIONS no lleva la clave.
+      const res = await doFetch(url + '?workflowApiKey=' + encodeURIComponent(key), {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Workflow-Api-Key': key },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(body || {})
       });
       if (!res.ok) {

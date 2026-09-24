@@ -9,9 +9,9 @@ function fakeFetch(status, body) {
 test('listProjects manda POST con la clave pública y normaliza imagenes', async () => {
   const f = fakeFetch(200, [{ id: 1, proyecto: 'A', contexto: 'B', rol: 'x\ny', imagenes: 'u1\n\nu2' }]);
   const list = await createApi(CFG, f).listProjects();
-  eq(f.calls[0].url, 'https://r/list');
+  eq(f.calls[0].url, 'https://r/list?workflowApiKey=kL');
   eq(f.calls[0].opts.method, 'POST');
-  eq(f.calls[0].opts.headers['X-Workflow-Api-Key'], 'kL');
+  eq(f.calls[0].opts.headers, { 'Content-Type': 'text/plain' }, 'sin cabeceras personalizadas (evita preflight CORS)');
   eq(list, [{ id: 1, proyecto: 'A', contexto: 'B', rol: 'x\ny', imagenes: ['u1', 'u2'] }]);
 });
 test('listProjects desenvuelve {data: [...]}', async () => {
@@ -27,8 +27,7 @@ test('createProject envía accion crear con la clave de admin y devuelve el id',
   const f = fakeFetch(200, { ok: true, id: 7 });
   const id = await createApi(CFG, f).createProject('kA', { proyecto: 'A', contexto: 'B', rol: 'C', imagenes: 'u' });
   eq(id, 7);
-  eq(f.calls[0].url, 'https://r/admin');
-  eq(f.calls[0].opts.headers['X-Workflow-Api-Key'], 'kA');
+  eq(f.calls[0].url, 'https://r/admin?workflowApiKey=kA');
   eq(JSON.parse(f.calls[0].opts.body), { accion: 'crear', proyecto: 'A', contexto: 'B', rol: 'C', imagenes: 'u' });
 });
 test('deleteProject envía accion eliminar con id numérico', async () => {
@@ -43,4 +42,9 @@ test('clave incorrecta: el error trae status 401', async () => {
 });
 test('verifyKey devuelve true con clave buena', async () => {
   eq(await createApi(CFG, fakeFetch(200, { ok: true })).verifyKey('buena'), true);
+});
+test('la clave se codifica en la URL', async () => {
+  const f = fakeFetch(200, { ok: true });
+  await createApi(CFG, f).verifyKey('a b&c');
+  eq(f.calls[0].url, 'https://r/admin?workflowApiKey=a%20b%26c');
 });
