@@ -3,12 +3,12 @@
 Sitio de 4 páginas: `index.html`, `proyectos.html`, `contacto.html`, `admin.html`.
 
 ## Tecnologías
-HTML, CSS (flex y grid), Bootstrap 5.3, Bootstrap Icons, Google Fonts, JavaScript (DOM + AJAX con `fetch`), Retool (Database + Workflows) y Formspree.
+HTML, CSS (flex y grid), Bootstrap 5.3, Bootstrap Icons, Google Fonts, JavaScript (DOM + AJAX con `fetch`) y Retool (Database + Workflows).
 
 ## Cómo funciona
 - `proyectos.html` pide los proyectos a un workflow de Retool (`js/api.js`) y los dibuja con DOM (`js/render.js`).
 - `admin.html` pide una clave (la API key del workflow `admin`) y permite agregar y eliminar proyectos con los campos: proyecto, contexto, rol e imágenes.
-- `contacto.html` envía el formulario con `fetch` a Formspree.
+- `contacto.html` muestra los enlaces de contacto (Instagram, correo y LinkedIn).
 
 ## Configuración
 Las URLs y la clave pública de lectura van en `js/config.js`. La clave de administración **no** va en el código: se escribe en `admin.html` y vive solo mientras la pestaña esté abierta.
